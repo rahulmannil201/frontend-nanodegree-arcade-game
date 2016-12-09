@@ -72,9 +72,9 @@ Enemy.prototype.render = function() {
     this.y = 400;
     this.x = 0;
     console.log("reset");
-    setTimeout (function() {
-            alert('YOU LOSE!');
-            }, 100);
+   //etTimeout (function() {
+     //     alert('YOU LOSE!');
+      //    }, 100);
  }
 
 Player.prototype.checkCollisions = function() {
@@ -85,14 +85,14 @@ Player.prototype.checkCollisions = function() {
 
             this.reset();
         }
-        else
+       /*   else
         {
-
-            setTimeout (function() {
-            alert('YOU WIN!');
-            }, 100);
+           console.log("win");
+           //etTimeout (function() {
+           //lert('YOU WIN!');
+           //, 100);
             this.reset();
-       }
+       } */
     }
 };
 
@@ -102,8 +102,9 @@ Player.prototype.checkCollisions = function() {
     if(direction ==='left'&& this.x > 25){
         this.x -= 100;
     }
-    if(direction ==='up'&& this.y < 0){
+    if(direction ==='up'&& this.y >50){
         this.y -= 100;
+
     }
 
     if(direction ==='right'&& this.x < 400){
@@ -112,8 +113,9 @@ Player.prototype.checkCollisions = function() {
 
 
 
-    if(direction ==='down'&& this.y<400){
+    if(direction ==='down'&& this.y<410){
         this.y += 100;
+
     }
 
 };
