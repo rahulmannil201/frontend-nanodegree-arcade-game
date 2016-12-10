@@ -47,30 +47,44 @@ Enemy.prototype.render = function() {
 
  Player.prototype.update = function(dt) {
 
-   if (this.x < 0 || this.x > 400){
-        if(this.x<0){
+
+
+ if (this.x <0 || this.x > 400){
+        if(this.x<0) {
             this.x = 0;
+
         }
         else{
             this.x = 400;
         }
     }
+    if(this.y<0|| this.y> 400)
+    {
 
-   if(this.y < 0 || this.y > 400){
-        if(this.y < 0) {
+        if(this.y <0){
             this.reset();
+
         }
+
         else{
             this.y = 400;
         }
     }
+    if ((this.x >= 0 || this.x <= 400) && this.y===0)
+
+
+    {
+        this.reset();
+    }
+
+
 
    this.checkCollisions();
  };
 
  Player.prototype.reset = function() {
     this.y = 400;
-    this.x = 0;
+   this.x=0;
     console.log("reset");
    //etTimeout (function() {
      //     alert('YOU LOSE!');
@@ -102,8 +116,10 @@ Player.prototype.checkCollisions = function() {
     if(direction ==='left'&& this.x > 25){
         this.x -= 100;
     }
-    if(direction ==='up'&& this.y >50){
-        this.y -= 100;
+    if(direction ==='up'&& this.y>50){
+        this.y -= 83;
+
+
 
     }
 
@@ -129,9 +145,9 @@ Player.prototype.checkCollisions = function() {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(0,50);
-var enemy2 = new Enemy(0,150);
-var enemy3 = new Enemy(0,250);
+var enemy1 = new Enemy(0,90);
+var enemy2 = new Enemy(0,180);
+var enemy3 = new Enemy(0,290);
 var allEnemies = [enemy1,enemy2,enemy3];
 var player = new Player(0,400);
 
