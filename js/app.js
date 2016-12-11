@@ -9,7 +9,8 @@ var Enemy = function(x,y,speed) {
     this.y = y;
     this.width = 90;
     this.height = 70;
-    this.speed= 150;
+   //his.speed= 150;
+   this.speed=speed;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -70,11 +71,12 @@ Enemy.prototype.render = function() {
             this.y = 400;
         }
     }
-    if ((this.x >= 0 || this.x <= 400) && this.y===0)
+    if ((this.x >= 0 || this.x <= 400) && this.y<20)
 
 
     {
         this.reset();
+        alert("you won!");
     }
 
 
@@ -145,9 +147,9 @@ Player.prototype.checkCollisions = function() {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(0,90);
-var enemy2 = new Enemy(0,180);
-var enemy3 = new Enemy(0,290);
+var enemy1 = new Enemy(0,90,150);
+var enemy2 = new Enemy(0,180,150);
+var enemy3 = new Enemy(0,290,150);
 var allEnemies = [enemy1,enemy2,enemy3];
 var player = new Player(0,400);
 
