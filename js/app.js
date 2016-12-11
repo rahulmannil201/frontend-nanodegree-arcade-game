@@ -41,6 +41,7 @@ Enemy.prototype.render = function() {
     this.speed =90;
     this.width = 75;
     this.height = 85;
+    this.score= 0;
 
     this.sprite = 'images/char-boy.png';
 
@@ -71,12 +72,17 @@ Enemy.prototype.render = function() {
             this.y = 400;
         }
     }
-    if ((this.x >= 0 || this.x <= 400) && this.y<20)
+    if (this.y<60)
 
 
     {
-        this.reset();
-        alert("you won!");
+
+        alert("uwin");
+    this.reset();
+       this.renderWin();
+    this.renderScore();
+        this.score=score+1;
+
     }
 
 
@@ -87,6 +93,7 @@ Enemy.prototype.render = function() {
  Player.prototype.reset = function() {
     this.y = 400;
    this.x=0;
+   this.score=0;
     console.log("reset");
    //etTimeout (function() {
      //     alert('YOU LOSE!');
@@ -136,6 +143,16 @@ Player.prototype.checkCollisions = function() {
 
     }
 
+};
+Player.prototype.renderScore = function() {
+ctx.font = "bold 20px Lato";
+ctx.fillStyle = "black";
+ctx.fillText("Score : "+ player.score ,1,30);
+};
+Player.prototype.renderWin = function() {
+  ctx.font = "bold 20px Lato";
+  ctx.fillStyle = "black";
+  ctx.fillText("CONGRATULATIONS!!YOU DID GREAT!!",20,100);
 };
 
  Player.prototype.render = function() {
