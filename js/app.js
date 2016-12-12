@@ -1,29 +1,30 @@
 // Enemies our player must avoid
-var Enemy = function(x,y,speed) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+    //intializing position,speed and images to enemy function
     this.x = x;
     this.y = y;
     this.width = 90;
     this.height = 70;
-   //his.speed= 150;
-   this.speed=speed;
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
+
 };
 
-// Update the enemy's position, required method for game
+
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + this.speed *dt;
+    this.x = this.x + this.speed * dt;
     if (this.x > 490) {
-            this.x = 0;
-        }
+        this.x = 0;
+    }
 
 };
 
@@ -35,71 +36,76 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
- var Player = function(x,y) {
+//Player class
+//updating speed,location,width and height of player function
+var Player = function(x, y) {
     this.x = x;
     this.y = y;
-    this.speed =90;
+    this.speed = 90;
     this.width = 75;
     this.height = 85;
-    this.score= 0;
+
 
     this.sprite = 'images/char-boy.png';
 
- };
+};
 
- Player.prototype.update = function(dt) {
+//checking boundary conditions
+//ensuring player cant move offscreen
+//update function
+//resetting the game when player wins and display U win
+//also checking whether there is a chance of collision
+Player.prototype.update = function(dt) {
 
 
 
- if (this.x <0 || this.x > 400){
-        if(this.x<0) {
+    if (this.x < 0 || this.x > 400) {
+        if (this.x < 0) {
             this.x = 0;
 
-        }
-        else{
+        } else {
             this.x = 400;
         }
     }
-    if(this.y<0|| this.y> 400)
-    {
+    if (this.y < 0 || this.y > 400) {
 
-        if(this.y <0){
+        if (this.y < 0) {
             this.reset();
 
-        }
-
-        else{
+        } else {
             this.y = 400;
         }
     }
-    if (this.y<60)
+    if (this.y < 1)
 
 
     {
 
-        alert("uwin");
-    this.reset();
-       this.renderWin();
-    this.renderScore();
-        this.score=score+1;
+        alert("U WIN");
+        this.reset();
+
 
     }
 
 
 
-   this.checkCollisions();
- };
+    this.checkCollisions();
+};
 
- Player.prototype.reset = function() {
+//reset the player back to intial position
+//reset function
+Player.prototype.reset = function() {
     this.y = 400;
-   this.x=0;
-   this.score=0;
-    console.log("reset");
-   //etTimeout (function() {
-     //     alert('YOU LOSE!');
-      //    }, 100);
- }
+    this.x = 0;
 
+    console.log("reset");
+
+};
+
+
+//collision checking function
+//comparing the player location,width and height with enemy and checks whether there is a chance for collision
+//reset if there is collision
 Player.prototype.checkCollisions = function() {
 
     for (var i = 0; i < allEnemies.length; i++) {
@@ -108,54 +114,39 @@ Player.prototype.checkCollisions = function() {
 
             this.reset();
         }
-       /*   else
-        {
-           console.log("win");
-           //etTimeout (function() {
-           //lert('YOU WIN!');
-           //, 100);
-            this.reset();
-       } */
+
     }
 };
 
+//function for moving player
+//make sure player can move around without moving offscreen
+Player.prototype.handleInput = function(direction) {
 
- Player.prototype.handleInput = function(direction) {
-
-    if(direction ==='left'&& this.x > 25){
+    if (direction === 'left' && this.x > 25) {
         this.x -= 100;
     }
-    if(direction ==='up'&& this.y>50){
-        this.y -= 83;
+    if (direction === 'up' && this.y >= 0) {
+        this.y -= 80;
 
 
 
     }
 
-    if(direction ==='right'&& this.x < 400){
+    if (direction === 'right' && this.x < 400) {
         this.x += 100;
     }
 
 
 
-    if(direction ==='down'&& this.y<410){
+    if (direction === 'down' && this.y < 410) {
         this.y += 100;
 
     }
 
 };
-Player.prototype.renderScore = function() {
-ctx.font = "bold 20px Lato";
-ctx.fillStyle = "black";
-ctx.fillText("Score : "+ player.score ,1,30);
-};
-Player.prototype.renderWin = function() {
-  ctx.font = "bold 20px Lato";
-  ctx.fillStyle = "black";
-  ctx.fillText("CONGRATULATIONS!!YOU DID GREAT!!",20,100);
-};
 
- Player.prototype.render = function() {
+//drawing the player
+Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -164,11 +155,13 @@ Player.prototype.renderWin = function() {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(0,90,150);
-var enemy2 = new Enemy(0,180,150);
-var enemy3 = new Enemy(0,290,150);
-var allEnemies = [enemy1,enemy2,enemy3];
-var player = new Player(0,400);
+//enemy objects
+var enemy1 = new Enemy(0, 90, 150);
+var enemy2 = new Enemy(0, 180, 150);
+var enemy3 = new Enemy(0, 290, 150);
+var allEnemies = [enemy1, enemy2, enemy3];
+//player object
+var player = new Player(0, 400);
 
 // Place the player object in a variable called player
 
