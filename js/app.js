@@ -28,9 +28,13 @@ Enemy.prototype.update = function(dt) {
 
 };
 
+
+
+
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 };
 
 // Now write your own player class
@@ -41,7 +45,6 @@ Enemy.prototype.render = function() {
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 90;
     this.width = 75;
     this.height = 85;
 
@@ -70,22 +73,13 @@ Player.prototype.update = function(dt) {
     if (this.y < 0 || this.y > 400) {
 
         if (this.y < 0) {
-            this.reset();
+           this.y=0;
 
         } else {
             this.y = 400;
         }
     }
-    if (this.y < 1)
 
-
-    {
-
-        alert("U WIN");
-        this.reset();
-
-
-    }
 
 
 
@@ -122,11 +116,11 @@ Player.prototype.checkCollisions = function() {
 //make sure player can move around without moving offscreen
 Player.prototype.handleInput = function(direction) {
 
-    if (direction === 'left' && this.x > 25) {
+    if (direction === 'left' && this.x > 0) {
         this.x -= 100;
     }
     if (direction === 'up' && this.y >= 0) {
-        this.y -= 80;
+        this.y -= 100;
 
 
 
@@ -138,7 +132,7 @@ Player.prototype.handleInput = function(direction) {
 
 
 
-    if (direction === 'down' && this.y < 410) {
+    if (direction === 'down' && this.y < 400) {
         this.y += 100;
 
     }
@@ -148,6 +142,20 @@ Player.prototype.handleInput = function(direction) {
 //drawing the player
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    if (this.y <= 0)
+
+
+    {
+
+
+
+         alert("U WIN");
+         this.reset();
+
+
+
+    }
+
 };
 
 
@@ -156,9 +164,9 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 //enemy objects
-var enemy1 = new Enemy(0, 90, 150);
-var enemy2 = new Enemy(0, 180, 150);
-var enemy3 = new Enemy(0, 290, 150);
+var enemy1 = new Enemy(-100, 90, 150);
+var enemy2 = new Enemy(-150, 180, 200);
+var enemy3 = new Enemy(-100, 290, 225);
 var allEnemies = [enemy1, enemy2, enemy3];
 //player object
 var player = new Player(0, 400);
