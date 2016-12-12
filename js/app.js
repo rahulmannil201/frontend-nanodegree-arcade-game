@@ -103,7 +103,7 @@ Player.prototype.reset = function() {
 Player.prototype.checkCollisions = function() {
 
     for (var i = 0; i < allEnemies.length; i++) {
-        if ((player.x < allEnemies[i].x + allEnemies[i].width) && (player.x + player.width > allEnemies[i].x) && (player.y < allEnemies[i].y + allEnemies[i].height) && (player.height + player.y > allEnemies[i].y)) {
+        if ((this.x < allEnemies[i].x + allEnemies[i].width) && (this.x + this.width > allEnemies[i].x) && (this.y < allEnemies[i].y + allEnemies[i].height) && (this.height + this.y > allEnemies[i].y)) {
             console.log("Collision!");
 
             this.reset();
@@ -119,8 +119,8 @@ Player.prototype.handleInput = function(direction) {
     if (direction === 'left' && this.x > 0) {
         this.x -= 100;
     }
-    if (direction === 'up' && this.y >= 0) {
-        this.y -= 100;
+    if (direction === 'up' && this.y > 0) {
+        this.y -= 80;
 
 
 
